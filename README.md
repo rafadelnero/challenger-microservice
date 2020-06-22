@@ -1,31 +1,5 @@
-# Setting up the dashboard
+# Spring boot challenger-microservice
 
-## Start dashboard
+Backend application with a basic CRUD using Java 11, Spring Boot, Spring Data and MongoDB.
 
-Create dashboard:
-```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
-```
-
-## Create user
-
-Create sample user (if using RBAC - on by default on new installs with kops / kubeadm):
-```
-kubectl create -f sample-user.yaml
-
-```
-
-## Get login token:
-```
-kubectl -n kube-system get secret | grep admin-user
-kubectl -n kube-system describe secret admin-user-token-<id displayed by previous command>
-```
-
-## Login to dashboard
-Go to http://api.cloud-dev-tests.xyz.com:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login
-
-Login: admin
-Password: the password that is listed in ~/.kube/config (open file in editor and look for "password: ..."
-
-Choose for login token and enter the login token from the previous step
-# challenger-microservice
+This project is also containerised with Docker and automated by Jenkins to deploy on dev, qa, staging and prod.
