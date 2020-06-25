@@ -248,6 +248,29 @@ class SimpsonCharacterControllerIntegrationTest {
 	
 	@Test
 	@Order(11)
+	@DisplayName("Create new character but character already exists with the same name and surname")
+	void create_new_simpson_character_passing_name_and_surname_but_it_already_exists_must_return_bad_request_response() {
+		String name = "Homer";
+		String surname = "Simpson";
+		String city = "Springfield";
+		String country = "United States";
+		LocalDate birthDate = LocalDate.now().minusYears(1L);
+		
+		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+
+		given()
+			.header(HttpHeaders.CONTENT_TYPE, "application/json")
+			.body(requestBody).
+		when()
+			.post("/characters").
+		then().
+			statusCode(HttpStatus.BAD_REQUEST.value()).
+				and().
+			body("message", equalTo("Character already exists with name " + name + " and surname " + surname));
+	}
+	
+	@Test
+	@Order(12)
 	@DisplayName("Get character by id passing invalid id")
 	void get_character_by_id_passing_invalid_id_must_return_not_found_response() {
 		String id = "xxxxx";

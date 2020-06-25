@@ -30,11 +30,17 @@ public class SimpsonCharacterService {
 	public SimpsonCharacter createNewCharacter(SimpsonCharacterRequestDTO simpsonCharacterRequestDTO) throws SimpsonCharacterException {
 		String name = simpsonCharacterRequestDTO.getName();
 		String surname = simpsonCharacterRequestDTO.getSurname();
+		
+		Optional<SimpsonCharacter> simpsonCharacter = simpsonCharacterRepository.findByNameAndSurname(name, surname);
+		if(simpsonCharacter.isPresent()) {
+			throw new SimpsonCharacterException("Character already exists with name " + name + " and surname " + surname);
+		}
+		
 		LocalDate birthDate = simpsonCharacterRequestDTO.getBirthDate();
 		String city = simpsonCharacterRequestDTO.getCity();
 		String country = simpsonCharacterRequestDTO.getCountry();
-		SimpsonCharacter simpsonCharacter = new SimpsonCharacter(name, surname, birthDate, city, country);
+		SimpsonCharacter newCharacter = new SimpsonCharacter(name, surname, birthDate, city, country);
 		
-		return simpsonCharacterRepository.save(simpsonCharacter);
+		return simpsonCharacterRepository.save(newCharacter);
 	}
 }
