@@ -1,11 +1,11 @@
 package com.javachallengers.simpson.service;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import com.javachallengers.simpson.exception.SimpsonCharacterException;
 import com.javachallengers.simpson.model.SimpsonCharacter;
@@ -28,19 +28,12 @@ public class SimpsonCharacterService {
 	}
 
 	public SimpsonCharacter createNewCharacter(SimpsonCharacterRequestDTO simpsonCharacterRequestDTO) throws SimpsonCharacterException {
-		Objects.requireNonNull(simpsonCharacterRequestDTO, "");
-		
 		String name = simpsonCharacterRequestDTO.getName();
-		if(StringUtils.isEmpty(name)) {
-			throw new SimpsonCharacterException("name must be provided");
-		}
-		
 		String surname = simpsonCharacterRequestDTO.getSurname();
-		if(StringUtils.isEmpty(surname)) {
-			throw new SimpsonCharacterException("surname must be provided");
-		}
-		
-		SimpsonCharacter simpsonCharacter = new SimpsonCharacter(name, surname);
+		LocalDate birthDate = simpsonCharacterRequestDTO.getBirthDate();
+		String city = simpsonCharacterRequestDTO.getCity();
+		String country = simpsonCharacterRequestDTO.getCountry();
+		SimpsonCharacter simpsonCharacter = new SimpsonCharacter(name, surname, birthDate, city, country);
 		
 		return simpsonCharacterRepository.save(simpsonCharacter);
 	}

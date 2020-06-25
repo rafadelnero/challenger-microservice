@@ -6,6 +6,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +37,7 @@ class SimpsonCharacterControllerTest {
 	}
 
 	@Test
-	void getCharacterById_GIVEN_non_null_id_AND_id_does_not_exists_MUST_return_not_found_response() {
+	void getCharacterById_given_non_null_id_and_id_does_not_exists_must_return_not_found_response() {
 		// GIVEN
 		String id = "2";
 		doReturn(Optional.empty()).when(simpsonCharacterService).getCharacterById(eq(id));
@@ -50,12 +51,15 @@ class SimpsonCharacterControllerTest {
 	}
 	
 	@Test
-	void getCharacterById_GIVEN_non_null_id_AND_id_exists_MUST_return_OK_response_with_character() {
+	void getCharacterById_given_non_null_id_and_id_exists_must_return_ok_response_with_character() {
 		// GIVEN
 		String id = "2";
 		String name = "Homer";
 		String surname = "Simpson";
-		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname);
+		String city = "Springfield";
+		String country = "United States";
+		LocalDate birthDate = LocalDate.now();
+		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
 		doReturn(Optional.ofNullable(homerSimpson)).when(simpsonCharacterService).getCharacterById(eq(id));
 		
 		// WHEN

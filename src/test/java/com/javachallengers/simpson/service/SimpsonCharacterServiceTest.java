@@ -8,6 +8,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +37,7 @@ class SimpsonCharacterServiceTest {
 	}
 	
 	@Test
-	void getById_GIVEN_null_id_MUST_throw_exception() {
+	void getById_given_null_id_must_throw_exception() {
 		// GIVEN
 		String id = null;
 		
@@ -51,7 +52,7 @@ class SimpsonCharacterServiceTest {
 	}
 	
 	@Test
-	void getById_GIVEN_non_null_id_AND_not_exist_MUST_return_empty_optional() {
+	void getById_given_non_null_id_and_not_exist_must_return_empty_optional() {
 		// GIVEN
 		String id = "1";
 		doReturn(Optional.empty()).when(simpsonCharacterRepository).findById(eq(id));
@@ -61,15 +62,19 @@ class SimpsonCharacterServiceTest {
 		
 		// THEN
 		assertTrue(character.isEmpty());
-		
 		verify(simpsonCharacterRepository, times(1)).findById(eq(id));
 	}
 	
 	@Test
-	void getById_GIVEN_non_null_id_AND_id_exists_MUST_return_non_empty_optional() {
+	void getById_given_non_null_id_and_id_exists_must_return_non_empty_optional() {
 		// GIVEN
 		String id = "1";
-		SimpsonCharacter homerSimpson = new SimpsonCharacter("Homer", "Simpson");
+		String name = "Homer";
+		String surname = "Simpson";
+		String city = "Springfield";
+		String country = "United States";
+		LocalDate birthDate = LocalDate.now().minusYears(1L);
+		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
 		doReturn(Optional.ofNullable(homerSimpson)).when(simpsonCharacterRepository).findById(eq(id));
 		
 		// WHEN
@@ -78,7 +83,6 @@ class SimpsonCharacterServiceTest {
 		// THEN
 		assertTrue(character.isPresent());
 		assertEquals(homerSimpson, character.get());
-		
 		verify(simpsonCharacterRepository, times(1)).findById(eq(id));
 	}
 }

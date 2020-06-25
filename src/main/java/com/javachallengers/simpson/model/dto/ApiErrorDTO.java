@@ -1,6 +1,7 @@
 package com.javachallengers.simpson.model.dto;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public final class ApiErrorDTO implements Serializable {
 	private static final long serialVersionUID = 5160147982546412023L;
@@ -8,9 +9,9 @@ public final class ApiErrorDTO implements Serializable {
 	private final String error;
 	private final int status;
 	private final String message;
-	private final long timestamp;
+	private final LocalDateTime timestamp;
 	
-	public ApiErrorDTO(String error, int status, String message, long timestamp) {
+	public ApiErrorDTO(String error, int status, String message, LocalDateTime timestamp) {
 		super();
 		this.error = error;
 		this.status = status;
@@ -30,7 +31,7 @@ public final class ApiErrorDTO implements Serializable {
 		return message;
 	}
 
-	public long getTimestamp() {
+	public LocalDateTime getTimestamp() {
 		return timestamp;
 	}
 }

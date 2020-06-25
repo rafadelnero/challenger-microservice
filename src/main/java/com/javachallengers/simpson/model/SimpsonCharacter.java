@@ -1,6 +1,7 @@
 package com.javachallengers.simpson.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
@@ -17,14 +18,23 @@ public class SimpsonCharacter implements Serializable {
 	
 	private String surname;
 	
+	private LocalDate birthDate;
+	
+	private String city;
+	
+	private String country;
+	
 	public SimpsonCharacter() {
 		super();
 	}
 	
-	public SimpsonCharacter(String name, String surname) {
+	public SimpsonCharacter(String name, String surname, LocalDate birthDate, String city, String country) {
 		super();
 		this.name = name;
 		this.surname = surname;
+		this.birthDate = birthDate;
+		this.city = city;
+		this.country = country;
 	}
 
 	public String getName() {
@@ -42,9 +52,38 @@ public class SimpsonCharacter implements Serializable {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+	
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+	
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
+	}
+	
+	public String getCity() {
+		return city;
+	}
+	
+	public void setCity(String city) {
+		this.city = city;
+	}
+	
+	public String getCountry() {
+		return country;
+	}
+	
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
 	public String getId() {
 		return id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(birthDate, city, country, id, name, surname);
 	}
 
 	@Override
@@ -59,17 +98,13 @@ public class SimpsonCharacter implements Serializable {
 			return false;
 		}
 		SimpsonCharacter other = (SimpsonCharacter) obj;
-		return Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(surname, other.surname);
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, name, surname);
+		return Objects.equals(birthDate, other.birthDate) && Objects.equals(city, other.city)
+				&& Objects.equals(country, other.country) && Objects.equals(id, other.id)
+				&& Objects.equals(name, other.name) && Objects.equals(surname, other.surname);
 	}
 
 	@Override
 	public String toString() {
-		return "SimpsonCharacter [id=" + id + ", name=" + name + ", surname=" + surname + "]";
+		return "SimpsonCharacter [id=" + id + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate + ", city=" + city + ", country=" + country + "]";
 	}
 }

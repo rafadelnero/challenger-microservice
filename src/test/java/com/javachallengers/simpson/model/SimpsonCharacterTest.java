@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -18,14 +20,18 @@ class SimpsonCharacterTest {
 		// GIVEN
 		String name = "Homer";
 		String surname = "Simpson";
+		String city = "Springfield";
+		String country = "United States";
+		LocalDate birthDate = LocalDate.now().minusYears(1L);
 		
 		// WHEN
-		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname);
+		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
 		
 		// THEN
 		assertEquals(name, homerSimpson.getName());
 		assertEquals(surname, homerSimpson.getSurname());
 		assertNull(homerSimpson.getId());
+		assertEquals(birthDate, homerSimpson.getBirthDate());
 	}
 	
 	@Test
@@ -33,28 +39,40 @@ class SimpsonCharacterTest {
 		// GIVEN
 		String name = "Homer";
 		String surname = "Simpson";
+		String city = "Springfield";
+		String country = "United States";
+		LocalDate birthDate = LocalDate.now().minusYears(1L);
 		
 		// WHEN
 		SimpsonCharacter homerSimpson = new SimpsonCharacter();
-		
-		// THEN
 		homerSimpson.setName(name);
 		homerSimpson.setSurname(surname);
+		homerSimpson.setBirthDate(birthDate);
+		homerSimpson.setCity(city);
+		homerSimpson.setCountry(country);
 		
+		// THEN
 		assertEquals(name, homerSimpson.getName());
 		assertEquals(surname, homerSimpson.getSurname());
+		assertEquals(city, homerSimpson.getCity());
+		assertEquals(country, homerSimpson.getCountry());
 		assertNull(homerSimpson.getId());
 	}
 	
 	@Test
 	public void testHashCode() {
+		// GIVEN
 		String name = "Homer";
 		String surname = "Simpson";
+		String city = "Springfield";
+		String country = "United States";
+		LocalDate birthDate = LocalDate.now().minusYears(1L);
+		int hashCode = 1673336092;
 		
-		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname);
+		// WHEN
+		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
 		
-		int hashCode = 1630756805;
-		
+		// THEN		
 		assertEquals(hashCode, homerSimpson.hashCode());
 	}
 	
@@ -64,12 +82,15 @@ class SimpsonCharacterTest {
 		String id = null;
 		String name = "Homer";
 		String surname = "Simpson";
+		String city = "Springfield";
+		String country = "United States";
+		LocalDate birthDate = LocalDate.now().minusYears(1L);
 		
 		// WHEN
-		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname);
+		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
 		
 		// THEN
-		String toString = "SimpsonCharacter [id=" + id + ", name=" + name + ", surname=" + surname + "]";
+		String toString = "SimpsonCharacter [id=" + id + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate + ", city=" + city + ", country=" + country + "]";
 		assertEquals(toString, homerSimpson.toString());
 	}
 	
@@ -78,11 +99,14 @@ class SimpsonCharacterTest {
 	public void testEquals() {
 		String name = "Homer";
 		String surname = "Simpson";
+		String city = "Springfield";
+		String country = "United States";
+		LocalDate birthDate = LocalDate.now().minusYears(1L);
 		
-		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname);
-		SimpsonCharacter homerSimpsonClone = new SimpsonCharacter(name, surname);
-		SimpsonCharacter bartSimpson = new SimpsonCharacter("Bart", surname);
-		SimpsonCharacter srBurns = new SimpsonCharacter("Sr", "Burns");
+		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
+		SimpsonCharacter homerSimpsonClone = new SimpsonCharacter(name, surname, birthDate, city, country);
+		SimpsonCharacter bartSimpson = new SimpsonCharacter("Bart", surname, birthDate, city, country);
+		SimpsonCharacter srBurns = new SimpsonCharacter("Sr", "Burns", birthDate, city, country);
 		
 		assertTrue(homerSimpson.equals(homerSimpsonClone));
 		assertFalse(homerSimpson.equals(bartSimpson));
