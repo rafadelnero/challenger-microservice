@@ -25,7 +25,7 @@ import com.javachallengers.simpson.service.SimpsonCharacterService;
 @Tag("UnitTest")
 class SimpsonCharacterControllerTest {
 	@Mock
-	private SimpsonCharacterService simpsonCharacterService; 
+	private SimpsonCharacterService simpsonCharacterService;
 	
 	private SimpsonCharacterController simpsonCharacterController;
 	

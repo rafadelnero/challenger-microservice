@@ -20,19 +20,19 @@ import com.javachallengers.simpson.model.SimpsonCharacter;
 import com.javachallengers.simpson.repository.SimpsonCharacterRepository;
 
 /**
- * Unit tests for {@link SimpsonCharacterServiceImpl}
+ * Unit tests for {@link SimpsonCharacterService}
  */
 @Tag("UnitTest")
-class SimpsonCharacterServiceImplTest {
+class SimpsonCharacterServiceTest {
 	@Mock
 	private SimpsonCharacterRepository simpsonCharacterRepository;
 	
-	private SimpsonCharacterService simpsonCharacterService; 
+	private SimpsonCharacterService simpsonCharacterService;
 	
 	@BeforeEach
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		this.simpsonCharacterService = new SimpsonCharacterServiceImpl(simpsonCharacterRepository);
+		this.simpsonCharacterService = new SimpsonCharacterService(simpsonCharacterRepository);
 	}
 	
 	@Test
