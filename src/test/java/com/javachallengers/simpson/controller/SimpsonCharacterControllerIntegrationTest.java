@@ -583,4 +583,49 @@ class SimpsonCharacterControllerIntegrationTest {
 				and()
 			.body("message", equalTo("Another character already exists with the same name " + margaret.getName() + " and surname " + margaret.getSurname()));
 	}
+	
+	@Test
+	@Order(23)
+	@DisplayName("Delete character passing invalid id")
+	void delete_character_passing_invalid_id_must_return_not_found_response() {
+		String id = "xxxxx";
+		
+		given().
+		when()
+			.delete("/characters/" + id).
+		then().
+			statusCode(HttpStatus.NOT_FOUND.value());
+	}
+	
+	@Test
+	@Order(24)
+	@DisplayName("Delete character passing valid id")
+	void delete_character_passing_valid_id_must_return_ok_response() {
+		String id = homerSimpsonId;
+		
+		given().
+		when()
+			.delete("/characters/" + id).
+		then().
+			statusCode(HttpStatus.OK.value());
+		
+		given().
+		when()
+			.get("/characters/" + id).
+		then().
+			statusCode(HttpStatus.NOT_FOUND.value());
+	}
+	
+	@Test
+	@Order(25)
+	@DisplayName("Delete character passing valid id for already deleted character")
+	void delete_character_passing_valid_id_for_already_deleted_character_must_return_not_found_response () {
+		String id = homerSimpsonId;
+		
+		given().
+		when()
+			.delete("/characters/" + id).
+		then().
+			statusCode(HttpStatus.NOT_FOUND.value());
+	}
 }

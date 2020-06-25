@@ -63,4 +63,13 @@ public class SimpsonCharacterService {
 		
 		simpsonCharacterRepository.save(character);
 	}
+
+	public void deleteCharacter(String id) throws SimpsonCharacterException {
+		Optional<SimpsonCharacter> currentCharacter = simpsonCharacterRepository.findById(id);
+		if(currentCharacter.isEmpty()) {
+			throw new SimpsonCharacterException("Character not found");
+		}
+		
+		simpsonCharacterRepository.delete(currentCharacter.get());
+	}
 }
