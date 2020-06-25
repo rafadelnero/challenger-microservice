@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,6 +47,16 @@ public class SimpsonCharacterController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);
 		} catch (URISyntaxException exception) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage(), exception);
+		}
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateCharacter(@PathVariable("id") String id, @RequestBody @Valid SimpsonCharacterRequestDTO character) {
+		try {
+			simpsonCharacterService.updateCharacter(id, character);
+			return ResponseEntity.ok().build();
+		} catch (SimpsonCharacterException exception) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);
 		}
 	}
 }
