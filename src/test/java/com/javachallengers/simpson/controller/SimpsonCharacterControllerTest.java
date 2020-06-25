@@ -46,7 +46,6 @@ class SimpsonCharacterControllerTest {
 		
 		// THEN
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-		
 		verify(simpsonCharacterService, times(1)).getCharacterById(eq(id));
 	}
 	
@@ -65,7 +64,6 @@ class SimpsonCharacterControllerTest {
 		// THEN
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(homerSimpson, response.getBody());
-		
 		verify(simpsonCharacterService, times(1)).getCharacterById(eq(id));
 	}
 }
