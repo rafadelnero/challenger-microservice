@@ -22,7 +22,7 @@ class SimpsonCharacterTest {
 		String surname = "Simpson";
 		String city = "Springfield";
 		String country = "United States";
-		LocalDate birthDate = LocalDate.now().minusYears(1L);
+		LocalDate birthDate = LocalDate.of(2010, 1, 1);
 		
 		// WHEN
 		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
@@ -41,7 +41,7 @@ class SimpsonCharacterTest {
 		String surname = "Simpson";
 		String city = "Springfield";
 		String country = "United States";
-		LocalDate birthDate = LocalDate.now().minusYears(1L);
+		LocalDate birthDate = LocalDate.of(2010, 1, 1);
 		
 		// WHEN
 		SimpsonCharacter homerSimpson = new SimpsonCharacter();
@@ -66,8 +66,8 @@ class SimpsonCharacterTest {
 		String surname = "Simpson";
 		String city = "Springfield";
 		String country = "United States";
-		LocalDate birthDate = LocalDate.now().minusYears(1L);
-		int hashCode = 1673336092;
+		LocalDate birthDate = LocalDate.of(2010, 1, 1);
+		int hashCode = 1003308916;
 		
 		// WHEN
 		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
@@ -84,7 +84,7 @@ class SimpsonCharacterTest {
 		String surname = "Simpson";
 		String city = "Springfield";
 		String country = "United States";
-		LocalDate birthDate = LocalDate.now().minusYears(1L);
+		LocalDate birthDate = LocalDate.of(2010, 1, 1);
 		
 		// WHEN
 		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
@@ -101,7 +101,7 @@ class SimpsonCharacterTest {
 		String surname = "Simpson";
 		String city = "Springfield";
 		String country = "United States";
-		LocalDate birthDate = LocalDate.now().minusYears(1L);
+		LocalDate birthDate = LocalDate.of(2010, 1, 1);
 		
 		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
 		SimpsonCharacter homerSimpsonClone = new SimpsonCharacter(name, surname, birthDate, city, country);
