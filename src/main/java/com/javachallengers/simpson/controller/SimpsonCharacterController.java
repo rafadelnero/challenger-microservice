@@ -3,6 +3,7 @@ package com.javachallengers.simpson.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -32,6 +34,12 @@ public class SimpsonCharacterController {
 		this.simpsonCharacterService = simpsonCharacterService;
 	}
 	
+	@GetMapping
+	public Page<SimpsonCharacter> getAll(@RequestParam(required = false, value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+		return simpsonCharacterService.getAll(page, size);
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<SimpsonCharacter> getCharacterById(@PathVariable("id") String id) {		
 		return ResponseEntity.of(simpsonCharacterService.getCharacterById(id));
@@ -41,7 +49,7 @@ public class SimpsonCharacterController {
 	public ResponseEntity<Object> createNewCharacter(@RequestBody @Valid SimpsonCharacterRequestDTO character) {
 		try {
 			SimpsonCharacter simpsonCharacater = simpsonCharacterService.createNewCharacter(character);
-			String location = String.format("/%s", simpsonCharacater.getId());
+			String location = String.format("/characters/%s", simpsonCharacater.getId());
 			return ResponseEntity.status(HttpStatus.CREATED).header(HttpHeaders.LOCATION, location).build();
 		} catch (SimpsonCharacterException exception) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);

@@ -5,9 +5,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpHeaders;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +25,11 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
+import com.github.javafaker.Faker;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.javachallengers.simpson.application.SimpsonApplication;
 import com.javachallengers.simpson.model.SimpsonCharacter;
 import com.javachallengers.simpson.model.dto.SimpsonCharacterRequestDTO;
@@ -39,7 +47,7 @@ class SimpsonCharacterControllerIntegrationTest {
 	@LocalServerPort
 	private int port;
 
-	private static String homerSimpsonId;
+	private static List<String> createdCharacterIds = new ArrayList<>();
 	
 	@BeforeEach
 	public void configureRestAssured() {
@@ -238,7 +246,8 @@ class SimpsonCharacterControllerIntegrationTest {
 		extract()
 			.header("location");
 		
-		homerSimpsonId = location.substring(location.indexOf('/') + 1);
+		String homerSimpsonId = location.substring(location.lastIndexOf('/') + 1);
+		createdCharacterIds.add(homerSimpsonId);
 	}
 	
 	@Test
@@ -268,6 +277,8 @@ class SimpsonCharacterControllerIntegrationTest {
 	@Order(11)
 	@DisplayName("Get character by id passing valid id")
 	void get_character_by_id_passing_valid_id_must_return_ok_response () {
+		String homerSimpsonId = createdCharacterIds.get(0);
+		
 		given().
 		when()
 			.get("/characters/" + homerSimpsonId).
@@ -324,7 +335,7 @@ class SimpsonCharacterControllerIntegrationTest {
 	@Order(14)
 	@DisplayName("Update character passing no name")
 	void update_character_passing_no_name_must_return_bad_request_response() {
-		String id = homerSimpsonId;
+		String id = createdCharacterIds.get(0);
 		String name = "";
 		String surname = "Simpson";
 		String city = "Springfield";
@@ -348,7 +359,7 @@ class SimpsonCharacterControllerIntegrationTest {
 	@Order(15)
 	@DisplayName("Update character passing no surname")
 	void update_character_passing_no_surname_must_return_bad_request_response() {
-		String id = homerSimpsonId;
+		String id = createdCharacterIds.get(0);
 		String name = "Homer";
 		String surname = "";
 		String city = "Springfield";
@@ -372,7 +383,7 @@ class SimpsonCharacterControllerIntegrationTest {
 	@Order(16)
 	@DisplayName("Update character passing no birth date")
 	void update_character_passing_no_birth_date_must_return_bad_request_response() {
-		String id = homerSimpsonId;
+		String id = createdCharacterIds.get(0);
 		String name = "Homer";
 		String surname = "Simpson";
 		String city = "Springfield";
@@ -396,7 +407,7 @@ class SimpsonCharacterControllerIntegrationTest {
 	@Order(17)
 	@DisplayName("Update character passing birth date in the present")
 	void update_character_passing_birth_date_in_the_present_must_return_bad_request_response() {
-		String id = homerSimpsonId;
+		String id = createdCharacterIds.get(0);
 		String name = "Homer";
 		String surname = "Simpson";
 		String city = "Springfield";
@@ -420,7 +431,7 @@ class SimpsonCharacterControllerIntegrationTest {
 	@Order(18)
 	@DisplayName("Update character passing birth date in the future")
 	void update_character_passing_birth_date_in_the_future_must_return_bad_request_response() {
-		String id = homerSimpsonId;
+		String id = createdCharacterIds.get(0);
 		String name = "Homer";
 		String surname = "Simpson";
 		String city = "Springfield";
@@ -444,7 +455,7 @@ class SimpsonCharacterControllerIntegrationTest {
 	@Order(19)
 	@DisplayName("Update character passing no city")
 	void update_character_passing_no_city_must_return_bad_request_response() {
-		String id = homerSimpsonId;
+		String id = createdCharacterIds.get(0);
 		String name = "Homer";
 		String surname = "Simpson";
 		String city = "";
@@ -468,7 +479,7 @@ class SimpsonCharacterControllerIntegrationTest {
 	@Order(20)
 	@DisplayName("Update character passing no country")
 	void update_character_passing_no_country_must_return_bad_request_response() {
-		String id = homerSimpsonId;
+		String id = createdCharacterIds.get(0);
 		String name = "Homer";
 		String surname = "Simpson";
 		String city = "Springfield";
@@ -492,7 +503,7 @@ class SimpsonCharacterControllerIntegrationTest {
 	@Order(21)
 	@DisplayName("Update character passing new valid data")
 	void update_character_passing_new_valid_data_must_return_ok_response() {
-		String id = homerSimpsonId;
+		String id = createdCharacterIds.get(0);
 		String name = "Bart";
 		String surname = "Simpson Jr";
 		String city = "São Paulo";
@@ -558,18 +569,24 @@ class SimpsonCharacterControllerIntegrationTest {
 			extract()
 				.header("location");
 			
-		String lisaId = location.substring(location.indexOf('/') + 1);
+		String lisaId = location.substring(location.lastIndexOf('/') + 1);
+		createdCharacterIds.add(lisaId);
 		
 		SimpsonCharacterRequestDTO margaret = new SimpsonCharacterRequestDTO("Margaret", "Simpson", LocalDate.now().minusYears(20), "Springfield", "United States");
 		
-		given()
+		location = given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
 			.body(margaret).
 		when()
 			.post("/characters").
 		then().
 			statusCode(HttpStatus.CREATED.value()).
-			header("location", notNullValue());
+			header("location", notNullValue()).
+			extract()
+			.header("location");
+		
+		String margaretId = location.substring(location.lastIndexOf('/') + 1);
+		createdCharacterIds.add(margaretId);
 		
 		lisa = new SimpsonCharacterRequestDTO(margaret.getName(), margaret.getSurname(), LocalDate.now().minusYears(20), "Springfield", "United States");
 		
@@ -601,31 +618,122 @@ class SimpsonCharacterControllerIntegrationTest {
 	@Order(24)
 	@DisplayName("Delete character passing valid id")
 	void delete_character_passing_valid_id_must_return_ok_response() {
-		String id = homerSimpsonId;
-		
-		given().
-		when()
-			.delete("/characters/" + id).
-		then().
-			statusCode(HttpStatus.OK.value());
-		
-		given().
-		when()
-			.get("/characters/" + id).
-		then().
-			statusCode(HttpStatus.NOT_FOUND.value());
+		for(String id : createdCharacterIds) {
+			given().
+			when()
+				.delete("/characters/" + id).
+			then().
+				statusCode(HttpStatus.OK.value());
+			
+			given().
+			when()
+				.get("/characters/" + id).
+			then().
+				statusCode(HttpStatus.NOT_FOUND.value());
+		}
 	}
 	
 	@Test
 	@Order(25)
 	@DisplayName("Delete character passing valid id for already deleted character")
 	void delete_character_passing_valid_id_for_already_deleted_character_must_return_not_found_response () {
-		String id = homerSimpsonId;
+		String id = createdCharacterIds.get(0);
 		
 		given().
 		when()
 			.delete("/characters/" + id).
 		then().
 			statusCode(HttpStatus.NOT_FOUND.value());
+	}
+	
+	@Test
+	@Order(26)
+	@DisplayName("Get all characters using default pagination")
+	void get_all_characters_using_default_pagination () {
+		// GIVEN
+		createdCharacterIds.clear();
+		
+		int defaultSize = 10;
+		int defaultPage = 0;
+	
+		Faker faker = new Faker();
+		for(int i = 0; i < 10; i++) {
+			String name = faker.name().firstName();
+			String surname = faker.name().lastName();
+			LocalDate birthDate = LocalDate.now().minusYears(faker.number().numberBetween(1, 30));
+			String city = faker.country().capital();
+			String country = faker.country().name();
+			
+			SimpsonCharacterRequestDTO character = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+			
+			String location = given()
+				.header(HttpHeaders.CONTENT_TYPE, "application/json")
+				.body(character).
+			when()
+				.post("/characters").
+			then().
+				statusCode(HttpStatus.CREATED.value()).
+				header("location", notNullValue()).
+				extract()
+				.header("location");
+			
+			String id = location.substring(location.lastIndexOf('/') + 1);
+			createdCharacterIds.add(id);
+		}
+		
+		//WHEN
+		String resposeBody = given().
+		when()
+			.get("/characters").
+		then().
+			statusCode(HttpStatus.OK.value())
+			.and()
+			.extract().asString();
+		
+		JsonElement jsonElement = JsonParser.parseString(resposeBody);
+		JsonArray content = jsonElement.getAsJsonObject().getAsJsonArray("content");
+		JsonObject pageable = jsonElement.getAsJsonObject().getAsJsonObject("pageable");
+		
+		// THEN
+		assertEquals(defaultSize, content.size());
+		assertEquals(defaultPage, pageable.getAsJsonObject().getAsJsonPrimitive("pageNumber").getAsInt());
+		assertEquals(defaultSize, pageable.getAsJsonObject().getAsJsonPrimitive("pageSize").getAsInt());
+		assertTrue(jsonElement.getAsJsonObject().get("last").getAsBoolean());
+		assertEquals(1, jsonElement.getAsJsonObject().get("totalPages").getAsInt());
+		assertEquals(10, jsonElement.getAsJsonObject().get("totalElements").getAsInt());
+		assertTrue(jsonElement.getAsJsonObject().get("first").getAsBoolean());
+	}
+	
+	@Test
+	@Order(27)
+	@DisplayName("Get all characters using custom pagination")
+	void get_all_characters_using_custom_pagination () {
+		// GIVEN
+		int page = 1;
+		int size = 3;
+		int totalElements = 10;
+		int totalPages = (int) Math.ceil((double) totalElements / size);
+		
+		//WHEN
+		String resposeBody = given().
+			when()
+				.get("/characters?page=" + page + "&size=" + size).
+			then().
+				statusCode(HttpStatus.OK.value())
+				.and()
+				.extract().asString();
+		
+		JsonElement jsonElement = JsonParser.parseString(resposeBody);
+		JsonArray content = jsonElement.getAsJsonObject().getAsJsonArray("content");
+		JsonObject pageable = jsonElement.getAsJsonObject().getAsJsonObject("pageable");
+		
+		//THEN			
+		assertEquals(size, content.size());
+		assertEquals(page, pageable.getAsJsonObject().getAsJsonPrimitive("pageNumber").getAsInt());
+		assertEquals(size, pageable.getAsJsonObject().getAsJsonPrimitive("pageSize").getAsInt());
+		assertFalse(jsonElement.getAsJsonObject().get("last").getAsBoolean());
+		assertEquals(totalPages, jsonElement.getAsJsonObject().get("totalPages").getAsInt());
+		assertEquals(totalElements, jsonElement.getAsJsonObject().get("totalElements").getAsInt());
+		assertFalse(jsonElement.getAsJsonObject().get("first").getAsBoolean());
 	}
 }

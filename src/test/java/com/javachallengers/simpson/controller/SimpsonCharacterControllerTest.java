@@ -120,7 +120,7 @@ class SimpsonCharacterControllerTest {
 		
 		//THEN
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
-		assertEquals("/" + createdCharacter.getId(), response.getHeaders().get("location").get(0));
+		assertEquals("/characters/" + createdCharacter.getId(), response.getHeaders().get("location").get(0));
 		verify(simpsonCharacterService, times(1)).createNewCharacter(eq(character));
 	}
 	

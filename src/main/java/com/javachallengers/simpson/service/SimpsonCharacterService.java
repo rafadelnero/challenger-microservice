@@ -5,6 +5,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.javachallengers.simpson.exception.SimpsonCharacterException;
@@ -71,5 +74,10 @@ public class SimpsonCharacterService {
 		}
 		
 		simpsonCharacterRepository.delete(currentCharacter.get());
+	}
+
+	public Page<SimpsonCharacter> getAll(int page, int size) {
+		PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "id");
+		return this.simpsonCharacterRepository.findAll(pageRequest);
 	}
 }
