@@ -64,7 +64,15 @@ class SimpsonCharacterControllerTest {
 		String city = "Springfield";
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now();
-		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
+		SimpsonCharacter homerSimpson = SimpsonCharacter.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.id(id)
+				.build();
+		
 		doReturn(Optional.ofNullable(homerSimpson)).when(simpsonCharacterService).getCharacterById(eq(id));
 		
 		// WHEN
@@ -84,7 +92,13 @@ class SimpsonCharacterControllerTest {
 		String city = "Springfield";
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now();
-		SimpsonCharacterRequestDTO character = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO character = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 		
 		SimpsonCharacterException mockedException = new SimpsonCharacterException("test");
 		doThrow(mockedException).when(simpsonCharacterService).createNewCharacter(eq(character));
@@ -110,9 +124,24 @@ class SimpsonCharacterControllerTest {
 		String city = "Springfield";
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now();
-		SimpsonCharacterRequestDTO character = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
-		SimpsonCharacter createdCharacter = new SimpsonCharacter(name, surname, birthDate, city, country);
-		createdCharacter.setId(id);
+		
+		SimpsonCharacterRequestDTO character = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
+				
+		SimpsonCharacter createdCharacter = SimpsonCharacter.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.id(id)
+				.build();
+		
 		doReturn(createdCharacter).when(simpsonCharacterService).createNewCharacter(eq(character));
 		
 		//WHEN
@@ -133,7 +162,14 @@ class SimpsonCharacterControllerTest {
 		String city = "Springfield";
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now();
-		SimpsonCharacterRequestDTO character = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO character = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
+		
 		SimpsonCharacterException mockedException = new SimpsonCharacterException("test");
 		doThrow(mockedException).when(simpsonCharacterService).updateCharacter(eq(id), eq(character));
 		
@@ -158,7 +194,13 @@ class SimpsonCharacterControllerTest {
 		String city = "Springfield";
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now();
-		SimpsonCharacterRequestDTO character = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO character = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 		
 		//WHEN
 		ResponseEntity<Object> response = simpsonCharacterController.updateCharacter(id, character);

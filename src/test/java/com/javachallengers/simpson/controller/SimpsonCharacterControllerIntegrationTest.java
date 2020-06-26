@@ -72,7 +72,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -95,7 +101,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -118,7 +130,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -141,7 +159,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -164,7 +188,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = null;
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -187,7 +217,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now();
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -210,7 +246,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().plusDays(1);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -233,7 +275,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		String location = given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -260,7 +308,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -318,7 +372,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -342,7 +402,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -366,7 +432,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -390,7 +462,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = null;
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -414,7 +492,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now();
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -438,7 +522,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().plusYears(1);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -462,7 +552,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -486,7 +582,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String country = "";
 		LocalDate birthDate = LocalDate.now().minusYears(1);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -519,7 +621,14 @@ class SimpsonCharacterControllerIntegrationTest {
 					.extract()
 					.as(SimpsonCharacter.class);
 		
-		SimpsonCharacterRequestDTO requestBody = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO requestBody = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
+		
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
 			.body(requestBody).
@@ -556,7 +665,13 @@ class SimpsonCharacterControllerIntegrationTest {
 	@Order(22)
 	@DisplayName("Update character passing another character's name and surname")
 	void update_character_passing_another_characters_name_and_surname_must_return_bad_request_response() {
-		SimpsonCharacterRequestDTO lisa  = new SimpsonCharacterRequestDTO("Lisa", "Simpson", LocalDate.now().minusYears(20), "Springfield", "United States");
+		SimpsonCharacterRequestDTO lisa  = SimpsonCharacterRequestDTO.builder()
+			.birthDate(LocalDate.now().minusYears(20))
+			.city("Springfield")
+			.country("United States")
+			.name("Lisa")
+			.surname("Simpson")
+			.build();
 		
 		String location = given()
 				.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -572,7 +687,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String lisaId = location.substring(location.lastIndexOf('/') + 1);
 		createdCharacterIds.add(lisaId);
 		
-		SimpsonCharacterRequestDTO margaret = new SimpsonCharacterRequestDTO("Margaret", "Simpson", LocalDate.now().minusYears(20), "Springfield", "United States");
+		SimpsonCharacterRequestDTO margaret = SimpsonCharacterRequestDTO.builder()
+			.birthDate(LocalDate.now().minusYears(20))
+			.city("Springfield")
+			.country("United States")
+			.name("Margaret")
+			.surname("Simpson")
+			.build();
 		
 		location = given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -588,7 +709,13 @@ class SimpsonCharacterControllerIntegrationTest {
 		String margaretId = location.substring(location.lastIndexOf('/') + 1);
 		createdCharacterIds.add(margaretId);
 		
-		lisa = new SimpsonCharacterRequestDTO(margaret.getName(), margaret.getSurname(), LocalDate.now().minusYears(20), "Springfield", "United States");
+		lisa = SimpsonCharacterRequestDTO.builder()
+			.birthDate(LocalDate.now().minusYears(20))
+			.city("Springfield")
+			.country("United States")
+			.name(margaret.getName())
+			.surname(margaret.getSurname())
+			.build();
 		
 		given()
 			.header(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -664,7 +791,13 @@ class SimpsonCharacterControllerIntegrationTest {
 			String city = faker.country().capital();
 			String country = faker.country().name();
 			
-			SimpsonCharacterRequestDTO character = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+			SimpsonCharacterRequestDTO character = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 			
 			String location = given()
 				.header(HttpHeaders.CONTENT_TYPE, "application/json")

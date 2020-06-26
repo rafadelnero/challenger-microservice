@@ -77,7 +77,14 @@ class SimpsonCharacterServiceTest {
 		String city = "Springfield";
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
-		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
+		SimpsonCharacter homerSimpson = SimpsonCharacter.builder()
+				.name(name)
+				.surname(surname)
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.build();
+		
 		doReturn(Optional.ofNullable(homerSimpson)).when(simpsonCharacterRepository).findById(eq(id));
 		
 		// WHEN
@@ -98,11 +105,23 @@ class SimpsonCharacterServiceTest {
 		String city = "Springfield";
 		String country = "United States";
 
-		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
+		SimpsonCharacter homerSimpson = SimpsonCharacter.builder()
+				.name(name)
+				.surname(surname)
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.build();
 		
 		doReturn(Optional.ofNullable(homerSimpson)).when(simpsonCharacterRepository).findByNameAndSurname(eq(name), eq(surname));
 		
-		SimpsonCharacterRequestDTO simpsonCharacterRequestDTO = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO simpsonCharacterRequestDTO = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 		
 		try {
 			// WHEN
@@ -127,10 +146,23 @@ class SimpsonCharacterServiceTest {
 		String country = "United States";
 		doReturn(Optional.empty()).when(simpsonCharacterRepository).findByNameAndSurname(eq(name), eq(surname));
 		
-		SimpsonCharacter simpsonCharacter = new SimpsonCharacter(name, surname, birthDate, city, country);
+		SimpsonCharacter simpsonCharacter = SimpsonCharacter.builder()
+				.name(name)
+				.surname(surname)
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.build();
+		
 		doReturn(simpsonCharacter).when(simpsonCharacterRepository).save(any(SimpsonCharacter.class));
 		
-		SimpsonCharacterRequestDTO simpsonCharacterRequestDTO = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO simpsonCharacterRequestDTO = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
 		
 		// WHEN
 		SimpsonCharacter createdCharacter = simpsonCharacterService.createNewCharacter(simpsonCharacterRequestDTO);
@@ -150,7 +182,14 @@ class SimpsonCharacterServiceTest {
 		LocalDate birthDate = LocalDate.now().minusYears(10);
 		String city = "Springfield";
 		String country = "United States";
-		SimpsonCharacterRequestDTO simpsonCharacterRequestDTO = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO simpsonCharacterRequestDTO = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
+		
 		doReturn(Optional.empty()).when(simpsonCharacterRepository).findById(eq(id));
 		
 		try {
@@ -175,9 +214,23 @@ class SimpsonCharacterServiceTest {
 		LocalDate birthDate = LocalDate.now().minusYears(10);
 		String city = "Springfield";
 		String country = "United States";
-		SimpsonCharacter character = new SimpsonCharacter(name, surname, birthDate, city, country);
+		SimpsonCharacter character = SimpsonCharacter.builder()
+				.name(name)
+				.surname(surname)
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.build();
+		
 		character.setId("444");
-		SimpsonCharacterRequestDTO simpsonCharacterRequestDTO = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacterRequestDTO simpsonCharacterRequestDTO = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
+		
 		doReturn(Optional.ofNullable(character)).when(simpsonCharacterRepository).findById(eq(id));
 		doReturn(Optional.ofNullable(character)).when(simpsonCharacterRepository).findByNameAndSurname(eq(name), eq(surname));
 		
@@ -204,9 +257,23 @@ class SimpsonCharacterServiceTest {
 		LocalDate birthDate = LocalDate.now().minusYears(10);
 		String city = "Springfield";
 		String country = "United States";
-		SimpsonCharacter character = new SimpsonCharacter(name, surname, birthDate, city, country);
-		character.setId(id);
-		SimpsonCharacterRequestDTO simpsonCharacterRequestDTO = new SimpsonCharacterRequestDTO(name, surname, birthDate, city, country);
+		SimpsonCharacter character = SimpsonCharacter.builder()
+				.name(name)
+				.surname(surname)
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.id(id)
+				.build();
+		
+		SimpsonCharacterRequestDTO simpsonCharacterRequestDTO = SimpsonCharacterRequestDTO.builder()
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.name(name)
+				.surname(surname)
+				.build();
+		
 		doReturn(Optional.ofNullable(character)).when(simpsonCharacterRepository).findById(eq(id));
 		doReturn(Optional.ofNullable(character)).when(simpsonCharacterRepository).findByNameAndSurname(eq(name), eq(surname));
 		
@@ -246,7 +313,14 @@ class SimpsonCharacterServiceTest {
 		LocalDate birthDate = LocalDate.now().minusYears(10);
 		String city = "Springfield";
 		String country = "United States";
-		SimpsonCharacter character = new SimpsonCharacter(name, surname, birthDate, city, country);
+		SimpsonCharacter character = SimpsonCharacter.builder()
+				.name(name)
+				.surname(surname)
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.build();
+		
 		doReturn(Optional.ofNullable(character)).when(simpsonCharacterRepository).findById(eq(id));
 		
 		//WHEN

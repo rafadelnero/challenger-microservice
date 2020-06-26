@@ -41,8 +41,15 @@ public class SimpsonCharacterService {
 		LocalDate birthDate = simpsonCharacterRequestDTO.getBirthDate();
 		String city = simpsonCharacterRequestDTO.getCity();
 		String country = simpsonCharacterRequestDTO.getCountry();
-		SimpsonCharacter newCharacter = new SimpsonCharacter(name, surname, birthDate, city, country);
-
+		
+		SimpsonCharacter newCharacter = SimpsonCharacter.builder()
+				.name(name)
+				.surname(surname)
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.build();
+				
 		return simpsonCharacterRepository.save(newCharacter);
 	}
 

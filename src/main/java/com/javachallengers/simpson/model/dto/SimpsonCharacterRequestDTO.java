@@ -7,6 +7,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 public final class SimpsonCharacterRequestDTO implements Serializable {
 	private static final long serialVersionUID = 8840536784759714847L;
 
@@ -25,33 +30,4 @@ public final class SimpsonCharacterRequestDTO implements Serializable {
 	
 	@NotEmpty(message = "Country cannot be empty")
 	private String country;
-	
-	public SimpsonCharacterRequestDTO(String name, String surname, LocalDate birthDate, String city, String country) {
-		super();
-		this.name = name;
-		this.surname = surname;
-		this.birthDate = birthDate;
-		this.city = city;
-		this.country = country;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-	
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
-	
-	public String getCity() {
-		return city;
-	}
-	
-	public String getCountry() {
-		return country;
-	}
 }
