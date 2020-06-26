@@ -1,11 +1,9 @@
 package com.javachallengers.simpson.controller;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,11 +41,10 @@ public class SimpsonCharacterController {
 	public ResponseEntity<Object> createNewCharacter(@RequestBody @Valid SimpsonCharacterRequestDTO character) {
 		try {
 			SimpsonCharacter simpsonCharacater = simpsonCharacterService.createNewCharacter(character);
-			return ResponseEntity.created(new URI("/" + simpsonCharacater.getId())).build();
+			String location = String.format("/%s", simpsonCharacater.getId());
+			return ResponseEntity.status(HttpStatus.CREATED).header(HttpHeaders.LOCATION, location).build();
 		} catch (SimpsonCharacterException exception) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);
-		} catch (URISyntaxException exception) {
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage(), exception);
 		}
 	}
 	
