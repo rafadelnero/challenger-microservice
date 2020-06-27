@@ -23,17 +23,17 @@ class SimpsonCharacterTest {
 		String city = "Springfield";
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
-		
+
 		// WHEN
 		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
-		
+
 		// THEN
 		assertEquals(name, homerSimpson.getName());
 		assertEquals(surname, homerSimpson.getSurname());
 		assertNull(homerSimpson.getId());
 		assertEquals(birthDate, homerSimpson.getBirthDate());
 	}
-	
+
 	@Test
 	public void noArgsConstructor() {
 		// GIVEN
@@ -42,7 +42,7 @@ class SimpsonCharacterTest {
 		String city = "Springfield";
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
-		
+
 		// WHEN
 		SimpsonCharacter homerSimpson = new SimpsonCharacter();
 		homerSimpson.setName(name);
@@ -50,7 +50,7 @@ class SimpsonCharacterTest {
 		homerSimpson.setBirthDate(birthDate);
 		homerSimpson.setCity(city);
 		homerSimpson.setCountry(country);
-		
+
 		// THEN
 		assertEquals(name, homerSimpson.getName());
 		assertEquals(surname, homerSimpson.getSurname());
@@ -58,7 +58,7 @@ class SimpsonCharacterTest {
 		assertEquals(country, homerSimpson.getCountry());
 		assertNull(homerSimpson.getId());
 	}
-	
+
 	@Test
 	public void testHashCode() {
 		// GIVEN
@@ -67,15 +67,15 @@ class SimpsonCharacterTest {
 		String city = "Springfield";
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
-		int hashCode = 1673336092;
-		
+		int hashCode = 1759223545;
+
 		// WHEN
 		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
-		
-		// THEN		
+
+		// THEN
 		assertEquals(hashCode, homerSimpson.hashCode());
 	}
-	
+
 	@Test
 	public void testToString() {
 		// GIVEN
@@ -85,15 +85,15 @@ class SimpsonCharacterTest {
 		String city = "Springfield";
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
-		
+
 		// WHEN
 		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
-		
+
 		// THEN
 		String toString = "SimpsonCharacter [id=" + id + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate + ", city=" + city + ", country=" + country + "]";
 		assertEquals(toString, homerSimpson.toString());
 	}
-	
+
 	@Test
 	@SuppressWarnings("unlikely-arg-type")
 	public void testEquals() {
@@ -102,12 +102,12 @@ class SimpsonCharacterTest {
 		String city = "Springfield";
 		String country = "United States";
 		LocalDate birthDate = LocalDate.now().minusYears(1L);
-		
+
 		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
 		SimpsonCharacter homerSimpsonClone = new SimpsonCharacter(name, surname, birthDate, city, country);
 		SimpsonCharacter bartSimpson = new SimpsonCharacter("Bart", surname, birthDate, city, country);
 		SimpsonCharacter srBurns = new SimpsonCharacter("Sr", "Burns", birthDate, city, country);
-		
+
 		assertTrue(homerSimpson.equals(homerSimpsonClone));
 		assertFalse(homerSimpson.equals(bartSimpson));
 		assertFalse(homerSimpson.equals(srBurns));
