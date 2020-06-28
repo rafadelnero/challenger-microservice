@@ -54,24 +54,23 @@ public class SimpsonCharacterService {
 	}
 
 	public void updateCharacter(String id, SimpsonCharacterRequestDTO data) throws SimpsonCharacterException {
-		Optional<SimpsonCharacter> currentCharacter = simpsonCharacterRepository.findById(id);
-		if(currentCharacter.isEmpty()) {
-			throw new SimpsonCharacterException("Character not found");
-		}
+		SimpsonCharacter currentCharacter = simpsonCharacterRepository.findById(id).orElseThrow(() -> new SimpsonCharacterException("Character not found"));
 		
 		Optional<SimpsonCharacter> anotherCharacter = simpsonCharacterRepository.findByNameAndSurname(data.getName(), data.getSurname());
 		if(anotherCharacter.isPresent() && !anotherCharacter.get().getId().equals(id)) {
 			throw new SimpsonCharacterException("Another character already exists with the same name " + data.getName() + " and surname " + data.getSurname());
 		}
 	
-		SimpsonCharacter character = currentCharacter.get();
-		character.setName(data.getName());
-		character.setSurname(data.getSurname());
-		character.setBirthDate(data.getBirthDate());
-		character.setCity(data.getCity());
-		character.setCountry(data.getCountry());
+		currentCharacter = SimpsonCharacter.builder()
+				.id(currentCharacter.getId())
+				.name(data.getName())
+				.surname(data.getSurname())
+				.birthDate(data.getBirthDate())
+				.city(data.getCity())
+				.country(data.getCountry())
+				.build();
 		
-		simpsonCharacterRepository.save(character);
+		simpsonCharacterRepository.save(currentCharacter);
 	}
 
 	public void deleteCharacter(String id) throws SimpsonCharacterException {

@@ -220,9 +220,9 @@ class SimpsonCharacterServiceTest {
 				.birthDate(birthDate)
 				.city(city)
 				.country(country)
+				.id("444")
 				.build();
 		
-		character.setId("444");
 		SimpsonCharacterRequestDTO simpsonCharacterRequestDTO = SimpsonCharacterRequestDTO.builder()
 				.birthDate(birthDate)
 				.city(city)

@@ -7,13 +7,19 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
-import lombok.Builder;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@Data
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
 @Builder
 public final class SimpsonCharacterRequestDTO implements Serializable {
 	private static final long serialVersionUID = 8840536784759714847L;
+
+	@JsonInclude(Include.NON_NULL)
+	private String id;
 
 	@NotEmpty(message = "Name cannot be empty")
 	private final String name;
@@ -26,8 +32,8 @@ public final class SimpsonCharacterRequestDTO implements Serializable {
 	private final LocalDate birthDate;
 	
 	@NotEmpty(message = "City cannot be empty")
-	private String city;
+	private final String city;
 	
 	@NotEmpty(message = "Country cannot be empty")
-	private String country;
+	private final String country;
 }

@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @Builder
 public final class ApiErrorDTO implements Serializable {
 	private static final long serialVersionUID = 5160147982546412023L;
