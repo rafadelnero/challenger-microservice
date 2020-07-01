@@ -40,7 +40,7 @@ class SimpsonCharacterTest {
 		assertNull(homerSimpson.getId());
 		assertEquals(birthDate, homerSimpson.getBirthDate());
 	}
-	
+
 	@Test
 	public void noArgsConstructor() {
 		// GIVEN
@@ -66,7 +66,7 @@ class SimpsonCharacterTest {
 		assertEquals(country, homerSimpson.getCountry());
 		assertNull(homerSimpson.getId());
 	}
-	
+
 	@Test
 	@RepeatedTest(2)
 	public void testHashCode() {
