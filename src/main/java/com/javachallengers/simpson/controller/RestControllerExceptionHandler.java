@@ -27,7 +27,12 @@ public class RestControllerExceptionHandler {
 		String message = exception.getReason();
 		LocalDateTime timestamp = LocalDateTime.now();
 		
-		ApiErrorDTO body = new ApiErrorDTO(error, status, message, timestamp);
+		ApiErrorDTO body = ApiErrorDTO.builder()
+				.error(error)
+				.message(message)
+				.status(status)
+				.timestamp(timestamp)
+				.build();
 		
 		logger.error("Response Status: {} {}", exception.getStatus().value(), exception.getStatus().getReasonPhrase());
 		logger.error("Response Body: {}", body);
@@ -44,7 +49,12 @@ public class RestControllerExceptionHandler {
 		String message = exception.getBindingResult().getAllErrors().get(0).getDefaultMessage();
 		LocalDateTime timestamp = LocalDateTime.now();
 		
-		ApiErrorDTO body = new ApiErrorDTO(error, status, message, timestamp);
+		ApiErrorDTO body = ApiErrorDTO.builder()
+				.error(error)
+				.message(message)
+				.status(status)
+				.timestamp(timestamp)
+				.build();
 		
 		logger.error("Response Status: {} {}", status, HttpStatus.BAD_REQUEST.getReasonPhrase());
 		logger.error("Response Body: {}", body);

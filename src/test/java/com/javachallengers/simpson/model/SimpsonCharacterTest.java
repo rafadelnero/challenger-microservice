@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -22,11 +23,17 @@ class SimpsonCharacterTest {
 		String surname = "Simpson";
 		String city = "Springfield";
 		String country = "United States";
-		LocalDate birthDate = LocalDate.now().minusYears(1L);
-
+		LocalDate birthDate = LocalDate.of(2010, 1, 1);
+		
 		// WHEN
-		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
-
+		SimpsonCharacter homerSimpson = SimpsonCharacter.builder()
+			.name(name)
+			.surname(surname)
+			.birthDate(birthDate)
+			.city(city)
+			.country(country)
+			.build();
+		
 		// THEN
 		assertEquals(name, homerSimpson.getName());
 		assertEquals(surname, homerSimpson.getSurname());
@@ -41,16 +48,17 @@ class SimpsonCharacterTest {
 		String surname = "Simpson";
 		String city = "Springfield";
 		String country = "United States";
-		LocalDate birthDate = LocalDate.now().minusYears(1L);
-
+		LocalDate birthDate = LocalDate.of(2010, 1, 1);
+		
 		// WHEN
-		SimpsonCharacter homerSimpson = new SimpsonCharacter();
-		homerSimpson.setName(name);
-		homerSimpson.setSurname(surname);
-		homerSimpson.setBirthDate(birthDate);
-		homerSimpson.setCity(city);
-		homerSimpson.setCountry(country);
-
+		SimpsonCharacter homerSimpson = SimpsonCharacter.builder()
+				.name(name)
+				.surname(surname)
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.build();
+		
 		// THEN
 		assertEquals(name, homerSimpson.getName());
 		assertEquals(surname, homerSimpson.getSurname());
@@ -60,38 +68,27 @@ class SimpsonCharacterTest {
 	}
 
 	@Test
+	@RepeatedTest(2)
 	public void testHashCode() {
 		// GIVEN
 		String name = "Homer";
 		String surname = "Simpson";
 		String city = "Springfield";
 		String country = "United States";
-		LocalDate birthDate = LocalDate.now().minusYears(1L);
-		int hashCode = 1759223545;
-
+		LocalDate birthDate = LocalDate.of(2010, 1, 1);
+		int hashCode = 1662714471;
+		
 		// WHEN
-		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
-
-		// THEN
+		SimpsonCharacter homerSimpson = SimpsonCharacter.builder()
+				.name(name)
+				.surname(surname)
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.build();
+		
+		// THEN		
 		assertEquals(hashCode, homerSimpson.hashCode());
-	}
-
-	@Test
-	public void testToString() {
-		// GIVEN
-		String id = null;
-		String name = "Homer";
-		String surname = "Simpson";
-		String city = "Springfield";
-		String country = "United States";
-		LocalDate birthDate = LocalDate.now().minusYears(1L);
-
-		// WHEN
-		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
-
-		// THEN
-		String toString = "SimpsonCharacter [id=" + id + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate + ", city=" + city + ", country=" + country + "]";
-		assertEquals(toString, homerSimpson.toString());
 	}
 
 	@Test
@@ -101,13 +98,40 @@ class SimpsonCharacterTest {
 		String surname = "Simpson";
 		String city = "Springfield";
 		String country = "United States";
-		LocalDate birthDate = LocalDate.now().minusYears(1L);
-
-		SimpsonCharacter homerSimpson = new SimpsonCharacter(name, surname, birthDate, city, country);
-		SimpsonCharacter homerSimpsonClone = new SimpsonCharacter(name, surname, birthDate, city, country);
-		SimpsonCharacter bartSimpson = new SimpsonCharacter("Bart", surname, birthDate, city, country);
-		SimpsonCharacter srBurns = new SimpsonCharacter("Sr", "Burns", birthDate, city, country);
-
+		LocalDate birthDate = LocalDate.of(2010, 1, 1);
+		
+		SimpsonCharacter homerSimpson = SimpsonCharacter.builder()
+				.name(name)
+				.surname(surname)
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.build();
+		
+		SimpsonCharacter homerSimpsonClone = SimpsonCharacter.builder()
+				.name(name)
+				.surname(surname)
+				.birthDate(birthDate)
+				.city(city)
+				.country(country)
+				.build();
+		
+		SimpsonCharacter bartSimpson = SimpsonCharacter.builder()
+			.name("Bart")
+			.surname(surname)
+			.birthDate(birthDate)
+			.city(city)
+			.country(country)
+			.build();
+		
+		SimpsonCharacter srBurns = SimpsonCharacter.builder()
+			.name("Sr")
+			.surname("Burns")
+			.birthDate(birthDate)
+			.city(city)
+			.country(country)
+			.build();
+		
 		assertTrue(homerSimpson.equals(homerSimpsonClone));
 		assertFalse(homerSimpson.equals(bartSimpson));
 		assertFalse(homerSimpson.equals(srBurns));
