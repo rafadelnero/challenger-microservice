@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 @ComponentScan( basePackages = {
 	"com.javachallengers.simpson.application",
+	"com.javachallengers.simpson.config",
 	"com.javachallengers.simpson.controller",
 	"com.javachallengers.simpson.exception",
 	"com.javachallengers.simpson.model",
