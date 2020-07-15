@@ -37,7 +37,7 @@ public class SimpsonCharacterController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SimpsonCharacter>> getAllCharacter() {
+    public ResponseEntity<List<SimpsonCharacter>> getAllCharacters() {
         var allCharacterBy = simpsonCharacterService.getAllCharacterBy();
         return new ResponseEntity<>(allCharacterBy, HttpStatus.OK);
     }
