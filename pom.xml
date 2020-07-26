@@ -21,6 +21,7 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.release>${java.version}</maven.compiler.release>
 		<io-rest-assured.version>4.0.0</io-rest-assured.version>
+        <docker.image.prefix>javachallengers</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -153,6 +154,26 @@
 					<release>${maven.compiler.release}</release>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.3.6</version>
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                    <buildArgs>
+                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 </project>

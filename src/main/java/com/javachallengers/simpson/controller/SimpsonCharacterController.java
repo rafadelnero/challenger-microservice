@@ -38,7 +38,6 @@ public class SimpsonCharacterController {
 	
 	@Autowired
 	public SimpsonCharacterController(SimpsonCharacterService simpsonCharacterService) {
-		super();
 		this.simpsonCharacterService = simpsonCharacterService;
 	}
 	
@@ -58,6 +57,7 @@ public class SimpsonCharacterController {
 	    @ApiResponse(code = 200, message = "Returns a simpson character by id"),
 	    @ApiResponse(code = 404, message = "Character not found", response = ApiErrorDTO.class)
 	})
+
 	@GetMapping("/{id}")
 	public ResponseEntity<SimpsonCharacter> getCharacterById(@ApiParam(value = "The id of the character", required = true) @PathVariable("id") String id) {		
 		return ResponseEntity.of(simpsonCharacterService.getCharacterById(id));
@@ -68,6 +68,7 @@ public class SimpsonCharacterController {
 	    @ApiResponse(code = 201, message = "Creates a new simpson character"),
 	    @ApiResponse(code = 400, message = "Invalid data or another character already exists with same name and username", response = ApiErrorDTO.class)
 	})
+
 	@PostMapping
 	public ResponseEntity<Object> createNewCharacter(@ApiParam(value = "The body of the request, with character data", required = true) @RequestBody @Valid SimpsonCharacterRequestDTO character) {
 		try {
@@ -87,11 +88,11 @@ public class SimpsonCharacterController {
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateCharacter(@ApiParam(value = "The id of the character", required = true) @PathVariable("id") String id, @ApiParam(value = "The body of the request, with character data to be updated", required = true) @RequestBody @Valid SimpsonCharacterRequestDTO character) {
 		try {
-			simpsonCharacterService.updateCharacter(id, character);
-			return ResponseEntity.ok().build();
-		} catch (SimpsonCharacterException exception) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);
-		}
+            simpsonCharacterService.updateCharacter(id, character);
+            return ResponseEntity.ok().build();
+        } catch (SimpsonCharacterException exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);
+        }
 	}
 	
 	@ApiOperation(value = "Deletes a simpson character")
@@ -109,4 +110,3 @@ public class SimpsonCharacterController {
 		}
 	}
 }
- 
