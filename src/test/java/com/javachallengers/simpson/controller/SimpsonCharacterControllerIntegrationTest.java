@@ -869,4 +869,15 @@ class SimpsonCharacterControllerIntegrationTest {
 		assertEquals(totalElements, jsonElement.getAsJsonObject().get("totalElements").getAsInt());
 		assertFalse(jsonElement.getAsJsonObject().get("first").getAsBoolean());
 	}
+	
+	@Test
+	@Order(28)
+	@DisplayName("Check swagger page")
+	void check_swagger_page() {
+		given().
+		when()
+			.get("/swagger-ui.html").
+		then().
+			statusCode(HttpStatus.OK.value());
+	}
 }
