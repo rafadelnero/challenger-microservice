@@ -12,7 +12,5 @@ spring:
 
 server:
   port: 8081
-  servlet:
-    context-path: /resource-server
 
 

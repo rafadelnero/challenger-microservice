@@ -9,7 +9,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/**").authorizeRequests()
-                .antMatchers(new String[]{"/", "/not-restricted"}).permitAll()
+            .antMatchers(new String[]{"/characters"}).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login();
