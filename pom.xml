@@ -21,7 +21,7 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.release>${java.version}</maven.compiler.release>
 		<io-rest-assured.version>4.0.0</io-rest-assured.version>
-        <docker.image.prefix>javachallengers</docker.image.prefix>
+		<docker.image.prefix>javachallengers</docker.image.prefix>
 	</properties>
 
 	<dependencies>
