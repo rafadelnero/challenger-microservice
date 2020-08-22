@@ -2,7 +2,6 @@ package com.javachallengers.simpson.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -10,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.javachallengers.simpson.exception.SimpsonCharacterException;
@@ -84,11 +81,11 @@ public class SimpsonCharacterService {
 
 	public void deleteCharacter(String id) throws SimpsonCharacterException {
 		Optional<SimpsonCharacter> currentCharacter = simpsonCharacterRepository.findById(id);
-		if(currentCharacter.isEmpty()) {
+		if(currentCharacter.isPresent()) {
+			simpsonCharacterRepository.delete(currentCharacter.get());
+		}else {
 			throw new SimpsonCharacterException("Character not found");
 		}
-
-		simpsonCharacterRepository.delete(currentCharacter.get());
 	}
 
 	public Page<SimpsonCharacter> getAll(int page, int size) {
