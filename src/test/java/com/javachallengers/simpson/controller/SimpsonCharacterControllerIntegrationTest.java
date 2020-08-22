@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import io.restassured.http.ContentType;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -284,7 +285,7 @@ class SimpsonCharacterControllerIntegrationTest {
 				.build();
 
 		String location = given()
-			.header(HttpHeaders.CONTENT_TYPE, "application/json")
+				.contentType(ContentType.JSON)
 			.body(requestBody).
 		when()
 			.post("/characters").

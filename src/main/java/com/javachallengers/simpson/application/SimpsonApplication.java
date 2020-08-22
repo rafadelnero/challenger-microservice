@@ -22,7 +22,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 })
 @EnableMongoRepositories("com.javachallengers.simpson.repository")
 @EntityScan(basePackages = "com.javachallengers.simpson.model")
-@PropertySource(value = "classpath:application.properties")
+@PropertySource(value = "classpath:application.yml")
 public class SimpsonApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(SimpsonApplication.class, args);
