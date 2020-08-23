@@ -16,11 +16,11 @@ import com.javachallengers.simpson.model.dto.ApiErrorDTO;
 
 @ControllerAdvice
 public class RestControllerExceptionHandler {
-	private static final Logger logger = LoggerFactory.getLogger(RestControllerExceptionHandler.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RestControllerExceptionHandler.class);
 	
 	@ExceptionHandler(value = { ResponseStatusException.class })
 	public ResponseEntity<ApiErrorDTO> handleResponseStatusException(ResponseStatusException exception) {
-		logger.error(exception.getMessage(), exception);
+		LOGGER.error(exception.getMessage(), exception);
 		
 		String error = exception.getStatus().getReasonPhrase();
 		int status = exception.getStatus().value();
@@ -34,15 +34,15 @@ public class RestControllerExceptionHandler {
 				.timestamp(timestamp)
 				.build();
 		
-		logger.error("Response Status: {} {}", exception.getStatus().value(), exception.getStatus().getReasonPhrase());
-		logger.error("Response Body: {}", body);
+		LOGGER.error("Response Status: {} {}", exception.getStatus().value(), exception.getStatus().getReasonPhrase());
+		LOGGER.error("Response Body: {}", body);
 		
 		return ResponseEntity.status(exception.getStatus()).contentType(MediaType.APPLICATION_JSON).body(body);
 	}
 	
 	@ExceptionHandler(value = { MethodArgumentNotValidException.class })
 	public ResponseEntity<ApiErrorDTO> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
-		logger.error(exception.getMessage(), exception);
+		LOGGER.error(exception.getMessage(), exception);
 		
 		String error = exception.getMessage();
 		int status = HttpStatus.BAD_REQUEST.value();
@@ -56,8 +56,8 @@ public class RestControllerExceptionHandler {
 				.timestamp(timestamp)
 				.build();
 		
-		logger.error("Response Status: {} {}", status, HttpStatus.BAD_REQUEST.getReasonPhrase());
-		logger.error("Response Body: {}", body);
+		LOGGER.error("Response Status: {} {}", status, HttpStatus.BAD_REQUEST.getReasonPhrase());
+		LOGGER.error("Response Body: {}", body);
 		
 		return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(body);
 	}
