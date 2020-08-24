@@ -57,7 +57,7 @@ class SimpsonCharacterControllerIntegrationTest {
 
 	@Test
 	@Order(1)
-	@DisplayName("Verify integration tests configurations")
+	@DisplayName("Verify integration tests configurations.")
 	void test_loaded_configurations() {
 		assertTrue(port > 0);
 		assertEquals(this.port, RestAssured.port);
