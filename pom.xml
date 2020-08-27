@@ -10,10 +10,11 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.javachallengers</groupId>
-	<artifactId>simpson</artifactId>
+	<artifactId>challenger-microservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>simpson</name>
-	<description>Spring-boot Java application with a CRUD that will manipulate a SimpsonCharacter with MongoDB</description>
+	<description>Spring-boot Java application with a CRUD that will manipulate a SimpsonCharacter
+		with MongoDB</description>
 
 	<properties>
 		<java.version>11</java.version>
@@ -21,7 +22,6 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.release>${java.version}</maven.compiler.release>
 		<io-rest-assured.version>4.0.0</io-rest-assured.version>
-        <docker.image.prefix>javachallengers</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -38,7 +38,6 @@
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -50,14 +49,12 @@
 			<version>2.9.2</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -154,26 +151,8 @@
 					<release>${maven.compiler.release}</release>
 				</configuration>
 			</plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.3.6</version>
-                <executions>
-                    <execution>
-                        <id>build-image</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
-                    <buildArgs>
-                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                    </buildArgs>
-                </configuration>
-            </plugin>
+
 		</plugins>
 	</build>
+
 </project>
