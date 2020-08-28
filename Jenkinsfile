@@ -19,6 +19,12 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+
+        stage('docker build/push') {
+            docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+                def app = docker.build("rafadelnero/challenger-microservice:${commit_id}", '.').push()
+            }
+        }
     }
 
     post {

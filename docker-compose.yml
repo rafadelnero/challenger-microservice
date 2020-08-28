@@ -7,7 +7,9 @@ services:
     - 27017:27017
     command: --smallfiles
   app:
-    image: javachallengers/simpson
+    build:
+      context: .
+      dockerfile: app.Dockerfile
     ports:
     - 8080:8080
     links:
