@@ -1,63 +1,27 @@
 pipeline {
-    agent { docker { image 'maven:3.6.3-jdk-11' } }
+
+    agent any
+
+    environment {
+        PASS = credentials('registry-pass')
+    }
+
     stages {
-        stage('compile') {
-            steps {
-                echo 'Compiling project'
-                sh 'mvn compile'
-            }
-        }
-        stage('test') {
-            steps {
-                echo 'Running tests'
-                sh 'mvn clean test'
-            }
-        }
-        stage('build') {
-            steps {
-                echo 'Building project'
-                sh 'mvn clean package'
-            }
-        }
 
-         stage('Building image') {
-             steps {
-                 script {
-                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                 }
-             }
-         }
-
-        stage('Deploy image') {
+        stage('Build') {
             steps {
-                script {
-                    docker.withRegistry( '', 'dockerhub' ) {
-                        dockerImage.push()
-                    }
+                sh '''
+                    ./jenkins/build/mvn.sh mvn -B -DskipTests clean package
+                    ./jenkins/build/build.sh
+                '''
+            }
+
+            post {
+                success {
+                   archiveArtifacts artifacts: 'java-app/target/*.jar', fingerprint: true
                 }
-            }
-        }
-
-        stage('docker build/push') {
-            docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
-                def app = docker.build("rafadelnero/challenger-microservice:${commit_id}", '.').push()
             }
         }
     }
 
-    post {
-        always {
-            sh "mvn clean"
-            echo "Finished"
-        }
-        success {
-            echo "Success"
-        }
-        unstable {
-            echo "Unstable"
-        }
-        failure {
-            echo "Failure"
-        }
-   }
 }
