@@ -1,7 +1,9 @@
 #!/bin/bash
 
+echo "$PWD"
+
 # Copy the new jar to the build location
-cp -f java-app/target/*.jar jenkins/build/
+cp -f challenger-microservice/target/*.jar jenkins/build/
 
 echo "****************************"
 echo "** Building Docker Image ***"
