@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Testing!!!! $PWD"
-
 # Copy the new jar to the build location
 cp -f challenger-microservice/target/*.jar jenkins/build/
 
