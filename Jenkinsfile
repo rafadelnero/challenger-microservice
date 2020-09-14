@@ -3,13 +3,6 @@ pipeline {
     agent any
 
     stages {
-        stage('delete files from workspace') {
-          steps {
-            sh 'ls -l'
-            sh 'sudo rm -rf ./*'
-          }
-        }
-
         stage('Build Test') {
             steps {
                 sh '''
