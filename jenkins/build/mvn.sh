@@ -2,7 +2,7 @@
 
 echo "****************************"
 echo "** Building jar *************"
-echo "***************************"
+echo "****************************"
 
 WORKSPACE=/var/jenkins_home/workspace/eline_deploy-application-jenkins
 
