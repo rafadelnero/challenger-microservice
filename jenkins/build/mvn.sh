@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "****************************"
-echo "** Building jar ************"
+echo "** Building jar *************"
 echo "***************************"
 
 WORKSPACE=/home/jenkins/jenkins-data/jenkins_home/workspace/pipeline-challenger-microservice
