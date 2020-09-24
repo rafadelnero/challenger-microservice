@@ -1,39 +1,21 @@
 pipeline {
-    agent { docker { image 'maven:3.6.3-jdk-11' } }
+
+    agent any
+
     stages {
-        stage('compile') {
+        stage('Build Test') {
             steps {
-                echo 'Compiling project'
-                sh 'mvn compile'
+                sh '''
+                    ./jenkins/build/mvn.sh mvn -B -DskipTests clean package
+                '''
             }
-        }
-        stage('test') {
-            steps {
-                echo 'Running tests'
-                sh 'mvn clean test'
-            }
-        }
-        stage('build') {
-            steps {
-                echo 'Building project'
-                sh 'mvn clean package'
+
+            post {
+                success {
+                   archiveArtifacts artifacts: 'java-app/target/*.jar', fingerprint: true
+                }
             }
         }
     }
 
-    post {
-        always {
-            sh "mvn clean"
-            echo "Finished"
-        }
-        success {
-            echo "Success"
-        }
-        unstable {
-            echo "Unstable"
-        }
-        failure {
-            echo "Failure"
-        }
-   }
 }

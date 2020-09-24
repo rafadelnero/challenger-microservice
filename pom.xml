@@ -20,7 +20,6 @@
 		<java.version>11</java.version>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<maven.compiler.release>${java.version}</maven.compiler.release>
 		<io-rest-assured.version>4.0.0</io-rest-assured.version>
 	</properties>
 
@@ -148,7 +147,6 @@
 				<configuration>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
-					<release>${maven.compiler.release}</release>
 				</configuration>
 			</plugin>
 
