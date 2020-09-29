@@ -6,13 +6,13 @@ pipeline {
         stage('Build Test') {
             steps {
                 sh '''
-                    ./jenkins/build/mvn.sh mvn -B -DskipTests clean package -X
+                    ./jenkins/build/mvn.sh mvn -B -DskipTests clean package
                 '''
             }
 
             post {
                 success {
-                   archiveArtifacts artifacts: 'java-app/target/*.jar', fingerprint: true
+                   archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
                 }
             }
         }
