@@ -7,6 +7,7 @@ echo "****************************"
 # WORKSPACE=/var/jenkins_home/workspace/rvice_deploy-application-jenkins
 
 # TODO Fix mapping, the current setup use the docker volume folder
+echo "Current workspace: "$WORKSPACE
 WORKSPACE=$(pwd)
 echo $WORKSPACE
 
