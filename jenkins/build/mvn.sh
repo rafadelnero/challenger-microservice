@@ -10,8 +10,10 @@ echo "****************************"
 echo "Current workspace: "$WORKSPACE
 WORKSPACE=/var/lib/docker/volumes/ubuntu_jenkins-home/_data/workspace/rvice_deploy-application-jenkins
 
-ABSOLUTE_WORKSPACE="/var/lib/docker/volumes/ubuntu_jenkins-home/_data/workspace"
+ABSOLUTE_WORKSPACE="/var/jenkins_home/workspace"
 JOB_WORKSPACE="\${PWD##*/}"
+
+echo $JOB_WORKSPACE
 
 docker run --rm  -v ${ABSOLUTE_WORKSPACE}/${JOB_WORKSPACE}:/app -v /root/.m2/:/root/.m2/ -w /app maven:3.6.3-jdk-11-slim "$@"
 
