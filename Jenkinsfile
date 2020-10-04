@@ -16,7 +16,6 @@ pipeline {
                 sh "docker run --rm  -v ${ABSOLUTE_WORKSPACE}/${JOB_WORKSPACE}:/app -v /root/.m2/:/root/.m2/ -w /app maven:3.6.3-jdk-11-slim mvn clean package"
 
                 echo "${PWD}"
-                ls "${PWD}"
 
                 sh "docker-compose build --no-cache"
 
