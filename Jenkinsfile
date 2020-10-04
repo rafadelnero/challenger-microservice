@@ -6,6 +6,7 @@ pipeline {
         ABSOLUTE_WORKSPACE = "/var/lib/docker/volumes/ubuntu_jenkins-home/_data/workspace/"
         JOB_WORKSPACE = "\${PWD##*/}"
         PASS = credentials('docker-hub-key')
+        IMAGE="maven-project"
     }
 
     stages {
@@ -49,8 +50,6 @@ pipeline {
                 echo "********************"
                 echo "** Pushing image ***"
                 echo "********************"
-
-                IMAGE="maven-project"
 
                 echo "** Logging in ***"
                 sh "docker login -u rafadelnero -p $PASS"
