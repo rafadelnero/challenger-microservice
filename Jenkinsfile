@@ -5,6 +5,7 @@ pipeline {
     environment {
         ABSOLUTE_WORKSPACE = "/var/lib/docker/volumes/ubuntu_jenkins-home/_data/workspace/"
         JOB_WORKSPACE = "\${PWD##*/}"
+        PASS = credentials('docker-hub-key')
     }
 
     stages {
@@ -40,6 +41,31 @@ pipeline {
                 always {
                     junit 'target/surefire-reports/*.xml'
                 }
+            }
+        }
+
+        stage('Push') {
+            steps {
+                echo "********************"
+                echo "** Pushing image ***"
+                echo "********************"
+
+                IMAGE="maven-project"
+
+                echo "** Logging in ***"
+                sh "docker login -u rafadelnero -p $PASS"
+
+                echo "*** Tagging image ***"
+                sh "docker tag $IMAGE:$BUILD_TAG rafadelnero/$IMAGE:$BUILD_TAG"
+
+                echo "*** Pushing image ***"
+                sh "docker push rafadelnero/$IMAGE:$BUILD_TAG"
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh './jenkins/deploy/deploy.sh'
             }
         }
     }
