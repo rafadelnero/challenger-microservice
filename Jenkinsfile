@@ -15,7 +15,7 @@ pipeline {
                 echo "****************************"
                 sh "docker run --rm  -v ${ABSOLUTE_WORKSPACE}/${JOB_WORKSPACE}:/app -v /root/.m2/:/root/.m2/ -w /app maven:3.6.3-jdk-11-slim mvn clean package"
 
-                echo $PWD
+                echo "${PWD}"
 //                 cp -f challenger-microservice/target/*.jar jenkins/build/
 //
 //                 echo "****************************"
