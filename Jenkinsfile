@@ -54,6 +54,7 @@ pipeline {
                 echo "** Logging in ***"
                 sh "docker login -u rafadelnero -p $PASS"
 
+                echo "$IMAGE:$BUILD_TAG"
                 echo "*** Tagging image ***"
                 sh "docker tag $IMAGE:$BUILD_TAG rafadelnero/$IMAGE:$BUILD_TAG"
 
@@ -64,7 +65,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh './jenkins/deploy/deploy.sh'
+               echo 'Will deploy'
             }
         }
     }
