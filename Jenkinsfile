@@ -58,7 +58,7 @@ pipeline {
                 echo "*** Tagging image ***"
                 sh "docker tag $IMAGE:$BUILD_TAG rafadelnero/$IMAGE:$BUILD_TAG"
 
-                echo "*** Pushing image ***"
+                echo "*** Pushing image ****"
                 sh "docker push rafadelnero/$IMAGE:$BUILD_TAG"
             }
         }
