@@ -9,7 +9,7 @@ services:
     networks:
       - spring-cloud-network
   app:
-    image: maven-project:java
+    image: maven-project:$BUILD_TAG
     build:
       context: .
       dockerfile: app.Dockerfile
