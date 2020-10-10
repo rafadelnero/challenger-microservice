@@ -54,7 +54,8 @@ pipeline {
                 echo "** Logging in ***"
                 sh "docker login -u rafadelnero -p $PASS"
 
-                echo "$IMAGE:$BUILD_TAG"
+                echo "Image and buildTag $IMAGE:$BUILD_TAG"
+                sh "docker images"
                 echo "*** Tagging image ***"
                 sh "docker tag $IMAGE:$BUILD_TAG rafadelnero/$IMAGE:$BUILD_TAG"
 
