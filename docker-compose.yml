@@ -6,8 +6,10 @@ services:
     ports:
     - 27017:27017
     command: --smallfiles
+    networks:
+      - spring-cloud-network
   app:
-    image: maven-project:$BUILD_TAG
+    image: maven-project:java
     build:
       context: .
       dockerfile: app.Dockerfile
@@ -15,3 +17,11 @@ services:
     - 8080:8080
     links:
     - mongodb
+    depends_on:
+      - mongodb
+    networks:
+      - spring-cloud-network
+
+networks:
+  spring-cloud-network:
+    driver: bridge
