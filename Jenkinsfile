@@ -57,7 +57,7 @@ pipeline {
                 echo "Image and buildTag $IMAGE:$BUILD_TAG"
                 sh "docker images"
                 echo "*** Tagging image ***"
-                sh "docker tag $IMAGE:$BUILD_TAG rafadelnero/$IMAGE:$BUILD_TAG"
+                sh "docker tag $IMAGE:$BUILD_TAG rafadelnero/maven-project:test"
 
                 echo "*** Pushing image ****"
                 sh "docker push rafadelnero/$IMAGE:$BUILD_TAG"
