@@ -7,6 +7,7 @@ pipeline {
         JOB_WORKSPACE = "\${PWD##*/}"
         PASS = credentials('docker-hub-key')
         IMAGE="maven-project"
+        BUILD_TAG="test"
     }
 
     stages {
@@ -54,10 +55,10 @@ pipeline {
                 echo "** Logging in ***"
                 sh "docker login -u rafadelnero -p $PASS"
 
-                echo "Image and buildTag maven-project:test"
+                echo "Image and build_tag: $IMAGE:$BUILD_TAG"
                 sh "docker images"
                 echo "*** Tagging image ***"
-                sh "docker tag $IMAGE:$BUILD_TAG rafadelnero/maven-project:test"
+                sh "docker tag $IMAGE:$BUILD_TAG rafadelnero/$IMAGE:$BUILD_TAG"
 
                 echo "*** Pushing image ****"
                 sh "docker push rafadelnero/$IMAGE:$BUILD_TAG"
