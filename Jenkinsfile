@@ -54,7 +54,7 @@ pipeline {
                 echo "** Logging in ***"
                 sh "docker login -u rafadelnero -p $PASS"
 
-                echo "Image and buildTag $IMAGE:$BUILD_TAG"
+                echo "Image and buildTag maven-project:test"
                 sh "docker images"
                 echo "*** Tagging image ***"
                 sh "docker tag $IMAGE:$BUILD_TAG rafadelnero/maven-project:test"
