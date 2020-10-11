@@ -4,24 +4,23 @@ services:
     image: mongo:3.2.4
     container_name: "mongodb"
     ports:
-    - 27017:27017
+      - 27017:27017
     command: --smallfiles
     networks:
       - spring-cloud-network
+
   app:
     image: maven-project:test
     build:
       context: .
       dockerfile: app.Dockerfile
     ports:
-    - 8080:8080
+      - 8080:8080
     links:
-    - mongodb
-    depends_on:
       - mongodb
     networks:
       - spring-cloud-network
 
 networks:
   spring-cloud-network:
-    driver: bridge
+
