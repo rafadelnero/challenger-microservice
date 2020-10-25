@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: challenger-service
+spec:
+  selector:
+    matchLabels:
+      app: challenger-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: challenger-service
+    spec:
+      containers:
+        - name: challenger-service
+          image: rafadelnero/maven-project:test
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
