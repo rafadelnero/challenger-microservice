@@ -1,20 +1,157 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: challenger-service
+  name: challenger-microservice
 spec:
   selector:
     matchLabels:
       app: challenger-service
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
         app: challenger-service
     spec:
       containers:
-        - name: challenger-service
-          image: rafadelnero/maven-project:test
-          imagePullPolicy: Never
+        - name: challenger-app
+          # enter the path to your image, be sure to include the correct region prefix
+          image: lhr.ocir.io/lrzrga0iwyeo/challenger-microsrvice/challenger-service:latest
           ports:
             - containerPort: 8080
+          env:
+            - name: MONGO_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: simpson-db-config
+                  key: database
+            - name: MONGO_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: simpson-db-config
+                  key: host
+      imagePullSecrets:
+        # enter the name of the secret you created
+        - name: ocirsecret
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: challenger-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: challenger-service
+
+
+
+
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: challenger-service
+#  labels:
+#    app: challenger-service
+#spec:
+#  ports:
+#    - protocol: TCP
+#      port: 8080
+#      nodePort: 30081
+#  type: NodePort
+#
+#  selector:
+#    app: challenger-service
+
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: challenger-service
+#spec:
+#  replicas: 1
+#  template:
+#    selector:
+#      matchLabels:
+#        app: challenger-microservice
+#    metadata:
+#      labels:
+#        app: challenger-service
+#        version: v1
+#    spec:
+#      containers:
+#        - name: challenger-app
+#          image: rafadelnero/maven-project:test
+#          imagePullPolicy: IfNotPresent
+#          env:
+#            - name: MONGODB_HOST
+#              value: mongodb
+#          ports:
+#            - containerPort: 8000
+#          livenessProbe:
+#            httpGet:
+#              path: /
+#              port: 8000
+#            initialDelaySeconds: 5
+#            periodSeconds: 5
+
+
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: challenger-microservice
+#spec:
+#  selector:
+#    matchLabels:
+#      app: challenger-service
+#  replicas: 1
+#  template:
+#    metadata:
+#      labels:
+#        app: challenger-service
+#    spec:
+#      containers:
+#        - name: challenger-service
+#          image: lhr.ocir.io/lrzrga0iwyeo/challenger-microsrvice/challenger-service:latest
+#          ports:
+#            - containerPort: 8080
+#        imagePullSecrets:
+#          - name: ocirsecret
+
+#    spec:
+#      containers:
+#        - name: challenger-service
+#          # enter the path to your image, be sure to include the correct region prefix
+#          image: lhr.ocir.io/lrzrga0iwyeo/challenger-microsrvice/challenger-service:latest
+#          ports:
+#            - containerPort: 8080
+#        imagePullSecrets:
+#          # enter the name of the secret you created
+#          - name: ocirsecret
+#            imagePullPolicy: Always
+
+#    spec:
+#      containers:
+#        - name: challenger-service
+#          image: lhr.ocir.io/lrzrga0iwyeo/challenger-microsrvice/challenger-service:latest
+#      imagePullSecrets:
+#        - name: ocirsecret
+#          imagePullPolicy: Always
+#          ports:
+#            - containerPort: 8080
+#
+#          env:
+#            - name: MONGO_DB
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: simpson-db-config
+#                  key: database
+#            - name: MONGO_HOST
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: simpson-db-config
+#                  key: host
+

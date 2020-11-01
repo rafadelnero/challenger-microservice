@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: simpson-db-config
+data:
+  host: mongodb
+  database: simpson-database
