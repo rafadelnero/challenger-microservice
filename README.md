@@ -22,3 +22,7 @@ This project is also containerised with Docker and automated by Jenkins to deplo
  }`
 
 - http://localhost:8080/characters (GET) # will give back all the characters 
+
+## To connect to MongoDB
+
+mongo "mongodb://132.145.48.20:27017"
