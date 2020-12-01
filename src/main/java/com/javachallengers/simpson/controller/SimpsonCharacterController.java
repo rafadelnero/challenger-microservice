@@ -1,5 +1,6 @@
 package com.javachallengers.simpson.controller;
 
+import javax.validation.Path;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class SimpsonCharacterController {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Returns a String")
 	})
-	@GetMapping
+	@GetMapping("newEndpoint")
 	public String getNew() {
 		return "New Endpoint!";
 	}
