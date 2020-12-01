@@ -10,7 +10,7 @@ pipeline {
         stage('test') {
             steps {
                 echo 'Running tests'
-                sh 'mvn clean test'
+                sh 'mvn clean test -DDATABASE_HOST=mongodb'
             }
         }
         stage('build') {
