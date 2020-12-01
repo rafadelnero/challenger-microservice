@@ -40,6 +40,15 @@ public class SimpsonCharacterController {
 	public SimpsonCharacterController(SimpsonCharacterService simpsonCharacterService) {
 		this.simpsonCharacterService = simpsonCharacterService;
 	}
+
+	@ApiOperation(value = "This is the New endpoint!")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Returns a String")
+	})
+	@GetMapping
+	public String getNew() {
+		return "New Endpoint!";
+	}
 	
 	@ApiOperation(value = "Returns a list of all simpson characters (with pagination)")
 	@ApiResponses(value = {
